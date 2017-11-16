@@ -4,10 +4,13 @@ var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
 var exphbs = require("express-handlebars");
+
 //Set up the port on either deployed port or port 3000
 var port = process.env.PORT || 3000;
+
 //Create the express app
 var app = express();
+
 //Middleware that serves our static files from the public directory
 app.use(express.static("public"));
 app.use(morgan("dev")); //logs every request to the console

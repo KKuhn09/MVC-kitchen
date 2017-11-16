@@ -1,16 +1,6 @@
 //Import the db connection
 var connection = require("../config/connection.js");
 
-//Helper function for SQL syntax
-function printQuestionMarks(num) {
-  var arr = [];
-  //For each item
-  for (var i = 0; i < num; i++) {
-    arr.push("?");//Push '?' to the array
-  }
-  return arr.toString();//Return the array as a string
-}
-
 //Helper function to convert object key/value pairs to SQL syntax
 function objToSql(ob) {
   var arr = [];
@@ -30,7 +20,7 @@ function objToSql(ob) {
   return arr.toString();// Return the array as a string
 }
 
-//The orm (object-relational mapping) that will convert data between javascript and mysql
+//The ORM (Object-Relational Mapping) that will convert data between javascript and mysql
 var orm = {
 	//Function that will grab all entries from a table
 	selectAll: function(tableName, cb){
@@ -44,12 +34,12 @@ var orm = {
 	insertOne: function(tableName, cols, vals, cb){
 		//Patch the query together
 		var queryString = "INSERT INTO "+tableName;
-			queryString += "("+cols.toString()+") "; 
-			queryString += "VALUES ("+printQuestionMarks(vals.length);
-			queryString += ") ";
-			console.log(queryString);
+			queryString += "("+cols.toString()+") ";
+			queryString += "VALUES ('";
+			queryString += vals;
+			queryString += "') ";
 		//Run the query		 
-		connection.query(queryString, vals, function(err){
+		connection.query(queryString, vals, function(err, result){
 			if(err) throw err;
 			cb(result);
 		});
@@ -61,7 +51,7 @@ var orm = {
 			queryString +=" WHERE "+condition;
 			console.log(queryString);
 
-		connection.query(queryString, function(err){
+		connection.query(queryString, function(err, result){
 			if(err) throw err;
 			cb(result);
 		});
