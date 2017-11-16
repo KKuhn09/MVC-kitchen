@@ -1,7 +1,7 @@
 //Import the ORM
 var orm = require("../config/orm.js");
 
-//Create the item model
+//Create the item model that will interact with the database
 var item = {
 	//Grab all items from the items table
 	all: function(){
