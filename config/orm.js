@@ -33,15 +33,15 @@ function objToSql(ob) {
 //The orm (object-relational mapping) that will convert data between javascript and mysql
 var orm = {
 	//Function that will grab all entries from a table
-	selectAll: function(tableName){
+	selectAll: function(tableName, cb){
 		var queryString = "SELECT * FROM "+tableName+";"; //Patch the query together
 		connection.query(queryString, function(err, result){
 			if(err) throw err; //If there is an error
-			console.log(result); //Else, log the result
+			cb(result); 
 		});
 	},
 	//Function that will insert an entry into the database
-	insertOne: function(tableName, cols, vals){
+	insertOne: function(tableName, cols, vals, cb){
 		//Patch the query together
 		var queryString = "INSERT INTO "+tableName;
 			queryString += "("+cols.toString()+") "; 
@@ -51,10 +51,11 @@ var orm = {
 		//Run the query		 
 		connection.query(queryString, vals, function(err){
 			if(err) throw err;
+			cb(result);
 		});
 	},
 	//Function that will update an entry in the database
-	updateOne: function(tableName, objColVals, condition){
+	updateOne: function(tableName, objColVals, condition, cb){
 		var queryString = "UPDATE "+tableName;
 			queryString +=" SET "+objToSql(objColVals); 
 			queryString +=" WHERE "+condition;
@@ -62,6 +63,7 @@ var orm = {
 
 		connection.query(queryString, function(err){
 			if(err) throw err;
+			cb(result);
 		});
 	}
 }

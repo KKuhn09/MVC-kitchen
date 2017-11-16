@@ -5,7 +5,7 @@ var router = express.Router();
 var item = require("../models/item.js");
 
 //======================================
-//Server routes the application will use 
+//Server routes the application will use
 //======================================
 
 //===============
@@ -24,5 +24,5 @@ router.get("/", function(req, res){
 		res.render("index", hbsObject); 
 	});
 });
-
+//Export the router
 module.exports = router;
