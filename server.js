@@ -8,7 +8,8 @@ var exphbs = require("express-handlebars");
 var port = process.env.PORT || 3000;
 //Create the express app
 var app = express();
-
+//Middleware that serves our static files from the public directory
+app.use(express.static("public"));
 app.use(morgan("dev")); //logs every request to the console
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(methodOverride("_method")); //Override default methods

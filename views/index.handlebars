@@ -1,1 +1,47 @@
-<h1>In the kitchen</h1>
+<div class="container-fluid">
+	<h1>In the kitchen</h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+
+		<!--Column where food not devoured(0) is displayed-->
+		<div class="col-md-offset-2 col-md-4">
+			<h2>Food to be eaten:</h2>
+
+			<ul>
+			  {{#each items}}
+			    {{#unless this.devoured}}
+				    <li>
+				      {{this.item_name}}
+
+				      <form action="/{{this.id}}?_method=PUT" method="POST">
+			          <input type="hidden" name="devoured" value="true">
+			          <button type="submit">DEVOUR IT!</button>
+			        </form>
+
+			      </li>
+			    {{/unless}}
+			  {{/each}}
+			</ul>
+		</div>
+		<!--Column where food devoured(1) is displayed-->
+		<div class="col-md-offset-2 col-md-4">
+			<h2>Food Eaten:</h2>
+
+			<ul>
+			  {{#each items}}
+			    {{#if this.devoured}}
+				    <li>
+				        {{this.item_name}}
+			        	<form action="/{{this.id}}?_method=PUT" method="POST">
+            				<input type="hidden" name="devoured" value="false">
+        			 	</form>
+			      	</li>
+			    {{/if}}
+			  {{/each}}
+			</ul>
+		</div>
+
+	</div>
+</div>
