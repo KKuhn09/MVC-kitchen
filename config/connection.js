@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 //Connect to the database
 connection.connect(function(err){
 	if(err) throw err;
-	console.log("Connected to "+connection.database+" as id "+connection.threadId);
+	console.log("Connected to kitchen_db as id "+connection.threadId);
 });
 //Export the connection for the orm
 module.exports = connection;
