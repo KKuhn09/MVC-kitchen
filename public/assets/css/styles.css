@@ -1,6 +1,10 @@
 *{
 	background-color: #ffcc66;
 }
-h1{
-	text-align: center;
+#wells{
+	margin-top:20px;
+}
+.foods{
+	margin: 15px;
+	font-size: 150%;
 }
