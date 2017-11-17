@@ -10,5 +10,5 @@ Highlights
 ----------
 * Implements a Model-View-Controller design pattern
 * Utilizes Node and Express
-* Handlebars.js as a templating engine
-* Uses a custom ORM (Object-relational mapping) to communicate between Javascript and mySQL 
+* Handlebars.js as a templating engine to generate HTML
+* Uses a custom ORM (Object-relational map) to communicate between Javascript(Node) and mySQL 
