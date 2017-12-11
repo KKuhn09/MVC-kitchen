@@ -6,7 +6,7 @@ var morgan = require("morgan");
 var exphbs = require("express-handlebars");
 
 //Set up the port on either deployed port or port 3000
-var port = "mysql://b4de8c4d948935:e1799891@us-cdbr-iron-east-05.cleardb.net/heroku_7d0856a7d67ea8e?reconnect=true"|| 3000;
+var port = process.env.PORT || 3000;
 
 //Create the express app
 var app = express();
