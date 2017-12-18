@@ -26,7 +26,7 @@ app.set("view engine", "handlebars");
 //MongoDB config
 mongoose.Promise = Promise; //set mongoose to leverage built in JS ES6 promises
 const db = mongoose.connection;
-mongoose.connect(dbConfig.url);
+mongoose.connect("mongodb://KKuhn09:J0hnD0375257@ds159866.mlab.com:59866/heroku_4vm85tmt" || dbConfig.url);
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
