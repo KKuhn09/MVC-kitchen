@@ -1,25 +1,17 @@
-//Import the ORM
-var orm = require("../config/orm.js");
-
+//Import mongoose
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 //Create the item model that will interact with the database
-var item = {
-	//Grab all items from the items table
-	all: function(cb){
-		orm.selectAll("items", function(res){
-			cb(res);
-		});
+var ItemSchema = new Schema({
+	item_name:{
+		type: String,
+		required:true
 	},
-	//Insert an item into the items table
-	insert: function(cols, vals, cb){
-		orm.insertOne("items", cols, vals, cb);
-	},
-	//Update an item in the items table
-	update: function(id, cb){
-		var condition = "id="+id; //Create the condition
-		orm.updateOne("items", {
-			devoured: true
-		}, condition, cb);
+	devoured:{
+		type: Boolean,
+		default: false,
+		required: true
 	}
-}
+});
 //Export the model
-module.exports = item;
+module.exports = mongoose.model('Item', ItemSchema);

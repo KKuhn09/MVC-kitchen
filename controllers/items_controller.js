@@ -2,7 +2,7 @@
 var express = require("express");
 var router = express.Router();
 //Import the item model
-var item = require("../models/item.js");
+var Item = require("../models/item.js");
 
 //======================================
 //Server routes the application will use
@@ -10,27 +10,39 @@ var item = require("../models/item.js");
 
 //GET method to display the homepage
 router.get("/", function(req, res){
-	item.all(function(data){
+	Item.find({}, function(error, data){
+		// Log any errors
+    	if (error) {
+      		console.log(error);
+   		}
 		//Create object for handlebars to use
-		var hbsObject = {
-			items: data
-		};
-		//Display index.handlebars, pass into it the hbsObject
-		res.render("index", hbsObject); 
+		else{
+			var hbsObject = {
+				items: data
+			};
+			//Display index.handlebars, pass into it the hbsObject
+			res.render("index", hbsObject); 
+		}
 	});
 });
 
 //POST method to insert an entry into the database
 router.post("/insert", function(req, res){
-	item.insert("item_name", req.body.item_name, function(result){
-		res.redirect("/"); //Refresh the page with the new item
+	var item = new Item(req.body);
+
+	item.save(function(error, doc){
+		if(error){
+			res.status(500).send(error);
+		}
+		res.redirect("/");
 	});
 });
 
 //POST method that updated an item
 router.post("/update", function(req, res){
-	item.update(req.body.item_id, function(result){
-		res.redirect("/"); //Refresh page with updated item
+	console.log(req.body.item_id);
+	Item.findOneAndUpdate({"_id": req.body.item_id},{$set:{"devoured":true}}, function(err, doc){
+		res.redirect("/");
 	});
 });
 

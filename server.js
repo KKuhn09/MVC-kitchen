@@ -1,5 +1,7 @@
 //Require packages
 var express = require("express");
+var mongoose = require("mongoose");
+var dbConfig = require("./config/connection.js");
 var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
@@ -20,6 +22,17 @@ app.use(methodOverride("_method")); //Override default methods
 //HANDLEBARS
 app.engine("handlebars", exphbs({ defaultLayout : "main" }));
 app.set("view engine", "handlebars");
+
+//MongoDB config
+mongoose.Promise = Promise; //set mongoose to leverage built in JS ES6 promises
+const db = mongoose.connection;
+mongoose.connect(dbConfig.url);
+db.on("error", function(error) {
+  console.log("Mongoose Error: ", error);
+});
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
 
 //Use the routes and start the app
 var routes = require("./controllers/items_controller.js");
