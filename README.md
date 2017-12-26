@@ -11,4 +11,4 @@ Highlights
 * Implements a Model-View-Controller design pattern
 * Utilizes Node and Express
 * MongoDB as Database
-* Handlebars.js as a templating engine to server HTML files
+* Handlebars.js as a templating engine to serve HTML files
